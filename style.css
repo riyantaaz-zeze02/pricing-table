@@ -1,0 +1,321 @@
+/* ============================================================
+   PRICING TABLE — style.css
+   
+   Alur CSS:
+   1. Reset & variabel warna (design tokens)
+   2. Layout makro (Flexbox container)
+   3. Card styling dasar (padding, border-radius, bg)
+   4. Elemen di dalam card (judul, harga, fitur, tombol)
+   5. Visual hierarchy — card .popular (highlight)
+   6. Hover & micro-animations
+   7. Responsif
+   ============================================================ */
+
+/* ----- 1. Reset & Design Tokens ----- */
+/* Komentar: Gunakan CSS custom properties agar mudah diubah temanya nanti. */
+:root {
+  /* Warna utama */
+  --clr-bg: #0f0f1a;
+  --clr-surface: #1a1a2e;
+  --clr-surface-highlight: #16213e;
+  --clr-border: rgba(255, 255, 255, 0.06);
+
+  /* Aksen */
+  --clr-accent: #7c5cfc;
+  --clr-accent-glow: rgba(124, 92, 252, 0.35);
+  --clr-accent-light: #a78bfa;
+
+  /* Teks */
+  --clr-text: #e2e2f0;
+  --clr-text-muted: #8888a4;
+  --clr-text-heading: #ffffff;
+
+  /* Radius & spacing */
+  --radius: 16px;
+  --card-padding: 2.5rem 2rem;
+
+  /* Shadow (latihan box-shadow) */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.25);
+  --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.35);
+  --shadow-accent: 0 8px 40px var(--clr-accent-glow);
+
+  /* Transisi */
+  --transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+  background-color: var(--clr-bg);
+  color: var(--clr-text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+
+  /* Subtle radial glow di tengah halaman */
+  background-image: radial-gradient(
+    circle at 50% 40%,
+    rgba(124, 92, 252, 0.08) 0%,
+    transparent 60%
+  );
+}
+
+/* ----- 2. Layout Makro (Flexbox) ----- */
+/* Komentar: Container ini mengatur ketiga card agar berdampingan dan terpusat. */
+.pricing-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.pricing-header h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--clr-text-heading);
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.02em;
+}
+
+.pricing-header p {
+  font-size: 1.1rem;
+  color: var(--clr-text-muted);
+  max-width: 480px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.pricing-container {
+  display: flex;
+  align-items: center;        /* Agar card sejajar di tengah secara vertikal */
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  max-width: 1100px;
+  width: 100%;
+}
+
+/* ----- 3. Card Styling Dasar ----- */
+/* Komentar: Setiap card memiliki background gelap, border halus, dan box-shadow ringan. */
+.pricing-card {
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius);
+  padding: var(--card-padding);
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  transition: transform var(--transition), box-shadow var(--transition);
+
+  /* Box-shadow dasar — memberikan efek "terangkat" dari background */
+  box-shadow: var(--shadow-sm);
+}
+
+/* ----- 4. Elemen di Dalam Card ----- */
+/* Komentar: Styling mikro untuk judul, harga, list fitur, dan tombol CTA. */
+
+.pricing-card .tier-name {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--clr-text-muted);
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.pricing-card .price {
+  font-size: 3rem;
+  font-weight: 800;
+  color: var(--clr-text-heading);
+  line-height: 1;
+  margin-bottom: 0.25rem;
+}
+
+.pricing-card .price span {
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--clr-text-muted);
+}
+
+.pricing-card .price-description {
+  font-size: 0.9rem;
+  color: var(--clr-text-muted);
+  margin-bottom: 2rem;
+}
+
+.pricing-card .features {
+  list-style: none;
+  flex-grow: 1;            /* Mendorong tombol ke bawah */
+  margin-bottom: 2rem;
+}
+
+.pricing-card .features li {
+  padding: 0.55rem 0;
+  font-size: 0.95rem;
+  color: var(--clr-text);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  border-bottom: 1px solid var(--clr-border);
+}
+
+.pricing-card .features li:last-child {
+  border-bottom: none;
+}
+
+/* Ikon centang sederhana menggunakan CSS */
+.pricing-card .features li::before {
+  content: "✓";
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(124, 92, 252, 0.12);
+  color: var(--clr-accent-light);
+  font-size: 0.7rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.pricing-card .cta-btn {
+  display: inline-block;
+  width: 100%;
+  padding: 0.9rem 1.5rem;
+  border: 2px solid var(--clr-accent);
+  border-radius: 10px;
+  background: transparent;
+  color: var(--clr-accent-light);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  transition: background var(--transition), color var(--transition),
+    box-shadow var(--transition);
+}
+
+.pricing-card .cta-btn:hover {
+  background: var(--clr-accent);
+  color: #fff;
+  box-shadow: 0 4px 20px var(--clr-accent-glow);
+}
+
+/* ----- 5. Visual Hierarchy — Card "Popular" ----- */
+/* Komentar: Ini inti dari latihan visual hierarchy.
+   Card Pro dibuat lebih menonjol lewat: ukuran lebih besar, 
+   shadow lebih kuat, border aksen, dan badge "Most Popular". */
+
+.pricing-card.popular {
+  background: var(--clr-surface-highlight);
+  border-color: var(--clr-accent);
+  transform: scale(1.05);       /* Sedikit lebih besar dari card lain */
+  box-shadow: var(--shadow-accent);   /* Shadow aksen yang lebih kuat */
+  z-index: 2;
+}
+
+/* Badge "Most Popular" */
+.pricing-card.popular .badge {
+  display: inline-block;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: var(--clr-accent);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.35rem 0.85rem;
+  border-radius: 50px;
+}
+
+/* Tombol CTA pada card popular — filled by default */
+.pricing-card.popular .cta-btn {
+  background: var(--clr-accent);
+  color: #fff;
+  border-color: var(--clr-accent);
+}
+
+.pricing-card.popular .cta-btn:hover {
+  background: #6a4be6;
+  border-color: #6a4be6;
+  box-shadow: 0 6px 28px var(--clr-accent-glow);
+}
+
+/* Ikon centang di card popular lebih cerah */
+.pricing-card.popular .features li::before {
+  background: rgba(124, 92, 252, 0.25);
+  color: #fff;
+}
+
+/* ----- 6. Hover & Micro-Animations ----- */
+/* Komentar: Efek hover membuat card terasa interaktif — 
+   shadow membesar dan card sedikit naik. */
+
+.pricing-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Card popular punya baseline scale, jadi hover-nya ditambah translateY */
+.pricing-card.popular:hover {
+  transform: scale(1.05) translateY(-6px);
+  box-shadow: 0 12px 50px var(--clr-accent-glow);
+}
+
+/* Glow bar di atas card popular */
+.pricing-card.popular::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--clr-accent), var(--clr-accent-light));
+}
+
+/* ----- 7. Responsif ----- */
+/* Komentar: Di layar kecil, card ditumpuk secara vertikal. */
+
+@media (max-width: 960px) {
+  .pricing-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .pricing-card.popular {
+    transform: scale(1);       /* Reset scale di mobile */
+    order: -1;                 /* Popular card di atas */
+  }
+
+  .pricing-card.popular:hover {
+    transform: translateY(-6px);
+  }
+
+  .pricing-card {
+    width: 100%;
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pricing-header h1 {
+    font-size: 1.8rem;
+  }
+
+  .pricing-card {
+    padding: 2rem 1.5rem;
+  }
+}

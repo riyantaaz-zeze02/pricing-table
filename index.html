@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Pilih paket harga terbaik untuk kebutuhan Anda — Free, Pro, atau Enterprise." />
+  <title>Pricing Table — Pilih Paket Anda</title>
+
+  <!-- Google Fonts: Inter untuk tipografi modern -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ============================================================
+       STRUKTUR HTML
+       Alur: Header → Container → 3x Card (Free, Pro, Enterprise)
+       Setiap card berisi: tier-name, price, features list, CTA button.
+       Card "Pro" mendapat class tambahan .popular untuk visual hierarchy.
+       ============================================================ -->
+
+  <section class="pricing-header" id="pricing">
+    <h1>Pilih Paket Anda</h1>
+    <p>Mulai gratis, upgrade kapan saja. Tanpa biaya tersembunyi.</p>
+  </section>
+
+  <div class="pricing-container">
+
+    <!-- ====== Card 1: FREE ====== -->
+    <!-- Komentar: Card dasar tanpa highlight — sebagai baseline visual. -->
+    <article class="pricing-card" id="card-free">
+      <p class="tier-name">Free</p>
+      <p class="price">$0<span>/bulan</span></p>
+      <p class="price-description">Untuk individu yang baru memulai</p>
+      <ul class="features">
+        <li>1 Proyek</li>
+        <li>5 GB Penyimpanan</li>
+        <li>Komunitas Support</li>
+        <li>Akses Fitur Dasar</li>
+      </ul>
+      <a href="#" class="cta-btn" id="cta-free">Mulai Gratis</a>
+    </article>
+
+    <!-- ====== Card 2: PRO (POPULAR / HIGHLIGHT) ====== -->
+    <!-- Komentar: Card ini mendapat class .popular — akan diberi perlakuan
+         khusus di CSS untuk visual hierarchy (scale, shadow, badge). -->
+    <article class="pricing-card popular" id="card-pro">
+      <span class="badge">Most Popular</span>
+      <p class="tier-name">Pro</p>
+      <p class="price">$19<span>/bulan</span></p>
+      <p class="price-description">Untuk profesional & tim kecil</p>
+      <ul class="features">
+        <li>Proyek Tanpa Batas</li>
+        <li>100 GB Penyimpanan</li>
+        <li>Prioritas Support</li>
+        <li>Fitur Lanjutan</li>
+        <li>Integrasi API</li>
+      </ul>
+      <a href="#" class="cta-btn" id="cta-pro">Pilih Pro</a>
+    </article>
+
+    <!-- ====== Card 3: ENTERPRISE ====== -->
+    <!-- Komentar: Card premium tapi tanpa highlight .popular —
+         hierarki visualnya tetap di bawah card Pro. -->
+    <article class="pricing-card" id="card-enterprise">
+      <p class="tier-name">Enterprise</p>
+      <p class="price">$49<span>/bulan</span></p>
+      <p class="price-description">Untuk organisasi & skala besar</p>
+      <ul class="features">
+        <li>Semua Fitur Pro</li>
+        <li>Penyimpanan Tak Terbatas</li>
+        <li>Dedicated Account Manager</li>
+        <li>Custom Branding</li>
+        <li>SLA 99.9% Uptime</li>
+      </ul>
+      <a href="#" class="cta-btn" id="cta-enterprise">Hubungi Sales</a>
+    </article>
+
+  </div>
+
+</body>
+</html>
